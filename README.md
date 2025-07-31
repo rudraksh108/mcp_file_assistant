@@ -40,7 +40,7 @@ mcp/
 ==========================
 1. Clone the repository:
 
-   git clone git@github.com:rudraksh108/mcp_file_assistant.git
+   git clone https://github.com/rudraksh108/mcp_file_assistant
    cd mcp-file-assistant
 
 2. Install dependencies:
