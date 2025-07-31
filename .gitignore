@@ -1,0 +1,26 @@
+# Byte-compiled / virtual environment
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+
+# System files
+.DS_Store
+Thumbs.db
+
+# PyInstaller builds
+dist/
+build/
+*.spec
+
+# Node-related
+node_modules/
+package-lock.json
+
+# Logs or dumps
+*.log
+
+# Index file (optional - if you don't want to share real paths)
+file_index.json.env
