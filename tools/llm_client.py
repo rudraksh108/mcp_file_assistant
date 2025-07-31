@@ -1,11 +1,20 @@
-from openai import OpenAI
+# tools/llm_client.py
 
-# ✅ Hardcoded API key and base URL
-api_key = "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"
-base_url = "https://openrouter.ai/api/v1"
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+# ✅ Load API key from .env
+load_dotenv()
+
+api_key = os.getenv("OPENROUTER_API_KEY")
+base_url = os.getenv("OPENROUTER_BASE_URL")
 model = "mistralai/mistral-7b-instruct"
 
-# ✅ Initialize client
+if not api_key or not base_url:
+    raise EnvironmentError("❌ API key or Base URL missing. Check your .env file.")
+
+# ✅ Initialize OpenAI-compatible client
 client = OpenAI(api_key=api_key, base_url=base_url)
 
 def call_llm(request: dict) -> dict:
@@ -32,9 +41,6 @@ def call_llm(request: dict) -> dict:
             temperature=0.0
         )
         return response.model_dump()
-    except Exception as e:
-        raise RuntimeError(f"❌ LLM error: {e}")
-        )
-        return response.model_dump()
+
     except Exception as e:
         raise RuntimeError(f"❌ LLM error: {e}")
