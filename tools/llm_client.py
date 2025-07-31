@@ -17,6 +17,7 @@ if not api_key or not base_url:
 # ✅ Initialize OpenAI-compatible client
 client = OpenAI(api_key=api_key, base_url=base_url)
 
+
 def call_llm(request: dict) -> dict:
     user_messages = request.get("messages", [])
     if not user_messages:
