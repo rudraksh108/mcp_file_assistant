@@ -1,25 +1,14 @@
-# cli/llm_client.py
-
 from openai import OpenAI
-from dotenv import load_dotenv
-import os
 
-# ✅ Load API key from .env
-load_dotenv()
-api_key = os.getenv("OPENROUTER_API_KEY")
-
-# ✅ Configurable parameters
+# ✅ Hardcoded API key and base URL
+api_key = "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"
 base_url = "https://openrouter.ai/api/v1"
 model = "mistralai/mistral-7b-instruct"
 
-# ✅ Initialize OpenAI-compatible client
+# ✅ Initialize client
 client = OpenAI(api_key=api_key, base_url=base_url)
 
 def call_llm(request: dict) -> dict:
-    """
-    Takes a chat-style prompt request and returns the LLM response in dictionary format.
-    Enforces a system prompt that tells the LLM to reply with file assistant-style instructions only.
-    """
     user_messages = request.get("messages", [])
     if not user_messages:
         raise ValueError("Missing 'messages' in request")
@@ -41,6 +30,10 @@ def call_llm(request: dict) -> dict:
             model=model,
             messages=[system_prompt] + user_messages,
             temperature=0.0
+        )
+        return response.model_dump()
+    except Exception as e:
+        raise RuntimeError(f"❌ LLM error: {e}")
         )
         return response.model_dump()
     except Exception as e:
